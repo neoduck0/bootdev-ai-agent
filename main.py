@@ -3,6 +3,7 @@ import os
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from openai.types.chat import ChatCompletionMessageParam
 
 
 def main():
@@ -20,7 +21,9 @@ def main():
         api_key=api_key,
     )
 
-    messages = [{"role": "user", "content": args.user_prompt}]
+    messages: list[ChatCompletionMessageParam] = [
+        {"role": "user", "content": args.user_prompt}
+    ]
 
     response = client.chat.completions.create(
         model="openrouter/free",
