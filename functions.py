@@ -1,7 +1,7 @@
 import os
 
 
-def get_file_info(working_directory: str, directory: str = ".") -> str:
+def get_files_info(working_directory: str, directory: str = ".") -> str:
     try:
         abs_wd: str = os.path.abspath(working_directory)
         abs_dir: str = os.path.join(abs_wd, directory)
