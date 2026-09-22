@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 
-from call_function import available_functions
+from call_function import available_functions, call_function
 from prompts import system_prompt
 
 
@@ -49,9 +49,9 @@ def main():
     if tool_calls != None:
         for tool_call in tool_calls:
             arguments: dict[str, str] = json.loads(tool_call.function.arguments or "{}")
-            print(
-                f"Calling function {tool_call.function.name} with arguments {arguments}"
-            )
+            result = call_function(tool_call, args.verbose)
+            if args.verbose:
+                print(f"-> {result['content']}")
 
     print(response.choices[0].message.content)
 
