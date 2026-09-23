@@ -49,6 +49,9 @@ def main():
         message = response.choices[0].message
         messages.append(message)
 
+        if message.content != None:
+            print(message.content)
+
         tool_calls = message.tool_calls
         if tool_calls != None:
             for tool_call in tool_calls:
@@ -60,9 +63,6 @@ def main():
                 messages.append(result)
                 if args.verbose:
                     print(f"-> {result['content']}")
-
-        if message.content != None:
-            print(message.content)
 
         if tool_calls == None:
             exit(0)
